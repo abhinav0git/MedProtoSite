@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Medicinal Herbs</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+  
+  <link type="text/css" rel ="stylesheet" href="/static/stylesheets/style.css" />
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+</head>
+<body>
+
+  <div>
+    <div class="header-blue">
+        <nav class="navbar navbar-light navbar-expand-md navigation-clean-search">
+            <div class="container-fluid"><a class="navbar-brand" href="http://127.0.0.1:5000/" style="height: 40px;" >
+               <span style="font-size: 50px; font-family:Georgia, 'Times New Roman', Times, serif; color: #e1f341;">औषध</span> 
+               <span style="font-size: 35px; font-family:Georgia, 'Times New Roman', Times, serif;">Hub</span>
+               <span> <img src="static\naturopathy.svg" alt="Logo" height="150px" ></span>
+               </a><button data-toggle="collapse" class="navbar-toggler" data-target="#navcol-1"><span class="sr-only">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
+                <div class="collapse navbar-collapse"
+                    id="navcol-1">
+                    <ul class="nav navbar-nav">
+                            <div class="dropdown-menu" role="menu"><a class="dropdown-item" role="presentation" href="https://drive.google.com/file/d/1nQQI2VCUm6886erJGA0VtoH2qoJfqlti/view?usp=share_link">Logo design</a><a class="dropdown-item" role="presentation" href="#">Banner design</a><a class="dropdown-item" role="presentation" href="#">content writing</a></div>
+                        </li>
+                    </ul>
+                    <form class="form-inline mr-auto" target="_self"> 
+                    </form><span class="navbar-text1" style="padding-top: 10px; font-size: 20px;"> <a class="login" href="https://github.com/AusafMo/Medicinal-Herb-Model-ResNet/blob/main/Medicinal.ipynb" style="font-size: large;">GitHub Model &nbsp; &nbsp; &nbsp;| &nbsp;  </a> <a class="login" href="https://drive.google.com/drive/folders/1lSpBinMh5_3myVoRxSoIojvRCPV7ULXQ?usp=sharing" style="font-size: large;"> App.py </a></span></div>
+                    
+            </div>
+        </nav>
+        <div class="container hero">
+            <div class="row">
+              <div class="container">
+                <br><br>
+                <label class="control-label col-sm-2" for="pwd"><span style="font-size: x-large; color: aliceblue;"> Upload Your Image: </span></label>
+                <form class="form-horizontal" action="/submit" method="post" enctype="multipart/form-data">
+                  <div class="form-group">
+                    <div class="col-sm-15" >          
+                      <input type="file" class="form-control" placeholder="Image File"  name="my_image" id="pwd" style="height: 52px; max-width: 73%; font-size: 25px;display: inline-block; vertical-align: middle;">
+                    </div>
+                  </div>
+                  <div class="form-group">        
+                    <div class="col-sm-offset-2 col-sm-10">
+                      <button type="submit" class="btn btn-success" style="height: 40px; width: 100px; font-size: medium; background-color: rgba(0, 0, 0, 0.532);">Upload</button>
+                    </div>
+                  </div>
+                </form>
+
+                {% if prediction | length > 0 %}
+                  
+                     &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+
+                  <!-- <div style="text-align: center;"> -->
+                    <img src="{{img_path}}" height="300px" width="300px" style="display: inline-block; background-color: transparent; border: 1px solid rgb(255, 255, 255); border-radius: 10px; box-shadow: 5px 5px 10px rgba(16, 15, 15, 0.333); text-align: center; margin: 20px; @media only screen and (max-width: 768px) {margin: 0;}">
+                  <!-- </div> -->
+                  
+
+                     &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+
+                  <div class="pie animate" style="--p:{{percent}};--c:#dce443;"> Confidence: {{percent}} </div>
+                    <br><br>
+                  <span style="font-size: xx-large; text-align: center;"><b>The Predicted Leaf Species is :</b>&nbsp; {{prediction}}  </span>
+                  <br>
+                  <span style="font-size: xx-large; text-align: center;"> <b>The Model Confidence is : </b> &nbsp;&nbsp; &nbsp;&nbsp;&nbsp; {{percent}} %  </span>
+
+                  <div style=" padding-top: 50px;">
+                    <span style="font-size: 35px;font-weight: bolder ; color: #2c5d10;">Some Description & Significance of <span style="font-size: 45px; "> <u>{{prediction}}</u>  </span> : </span> 
+                    </div>
+                    
+                    <div style="width: 1000px; padding-top: 25px; text-align: center ;">
+      
+                      <p class="first-word">
+                       <span style="font-size: xx-large; font-style: normal; font-weight: 700; color :antiquewhite;text-align: center;">{{data}}</span>
+                      </p>
+                    </div>
+      
+                {% endif %}
+              
+              </div>
+
+
+                <div  style="width: fit-content;" >
+                    <h1 style="color: black;"> <b>Medicinal Herb Prediction</b> </h1>
+                    <p style="color: black; font-weight: 300;">Medicinal plants are the source of raw herbal medicines. They are less costly and appear to produce less undesirable side effects than modern medicines. There are approximately 7,200 medicinal plants known in India, of which hundreds of plants have medicinal properties in their leaves. <br>
+
+                      Identifying such valuable plants often requires an expert or a manual. Therefore, there is a need to automate processes to retrieve information more quickly. Computer vision-based image processing is one of emerging techniques to computerize such tasks by emulating the human visual system. <br>
+                      
+                      Although the classification process of plant materials refers to many parameters such as macroscopic and microscopic observation, chemical analysis, and DNA fingerprinting, classification based on macroscopic observation of leaf images based on leaf shape, size, and morphology is the first option for Classification of plant leaves. It is cheap and convenient to select a leaf sample and obtain a leaf sample and its images of herbs.
+                      <br>
+                      The aim of the project is to take raw images of the leaves of plants (provided by the user), upon which it identifies whether the plant is one of the 40 medicinal leaves in the chosen dataset of medicinal herbs, if yes, then provide the user with any relevant information relating to the use case and procedure to use them (if any)
+                      .<br></p>
+                    <!-- <button
+                        class="btn btn-light btn-lg action-button" type="button">Learn More<i class="fa fa-long-arrow-right ml-2"></i></button> -->
+                </div>
+                
+                <!-- <div class="col-md-5 col-lg-5 offset-lg-1 offset-xl-0 d-none d-lg-block phone-holder">
+                    <div class="iphone-mockup">
+                      <img class="device" src="static\naturopathy.svg">
+                    </div> -->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

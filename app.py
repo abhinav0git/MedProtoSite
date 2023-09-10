@@ -150,7 +150,7 @@ def process_image(image_path):
     means = np.array([0.485, 0.456, 0.406]).reshape((3, 1, 1))
     stds = np.array([0.229, 0.224, 0.225]).reshape((3, 1, 1))
 
-    print(img.shape, means.shape)
+    # print(img.shape, means.shape)
     img = img - means
     img = img / stds
 
@@ -197,14 +197,21 @@ def predict(image_path, model, topk ):
         return img_tensor.cpu().squeeze(), top_p, top_classes
 
 
+"""############################### Extract Info from CSV corresponding to the Index  ############"""
+def extract(index):
+    df = pd.read_csv("/workspaces/MedProtoSite/static/info1.csv") 
 
+    # Retrieve column based on index and store as string
+    column_string = df.iloc[index, 2]
+
+    return column_string
 
 """##########################################   ROUTES    ##################################################"""
 
 # Home Route
 @app.route('/')
 def index():
-    return render_template("index.html")
+    return render_template("test.html")
 
 # when the user hits submit button
 @app.route('/submit', methods = ['GET', 'POST'])
@@ -221,12 +228,19 @@ def get_output():
         img, p, classes = predict(img_path, model, 1)
         result = pd.DataFrame({'p': p}, index = classes)
 
-        p = result.sort_values('p')['p']
+        # p = result.sort_values('p')['p']
+        # print(p)
+        # print(classes[0][0])
 
-    return render_template("index.html", prediction = p, img_path = img_path)
+        # Extract info about the leaf
+        info = extract(classes[0][0])
+
+        # print(info)
+
+
+    return render_template("test.html", prediction = classes[0][1], percent = round(p[0]*100,2),data = info,  img_path = img_path)
 
 
 """##################################### MAIN APP CALL #########################################"""
 if __name__ == "__main__":
     app.run( debug = True )
-
